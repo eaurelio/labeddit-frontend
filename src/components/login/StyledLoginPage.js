@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const LoginContainer = styled.div`
+export const LoginContainer = styled.form`
   margin: 0 auto;
   width: 428px;
 
@@ -12,7 +12,7 @@ export const LoginContainer = styled.div`
 
 export const LogoContainer = styled.div`
   width: 300px;
-  margin: 40px 0;
+  margin: 80px 0;
   
   img {
     max-width: 100%;

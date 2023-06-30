@@ -1,15 +1,26 @@
+import { useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 
-export default function GlobalState (props) {
+export default function GlobalState(props) {
 
-  // states, functions criados aqui
+  const [email, setMail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const context = {
-    // states, functions exportados aqui
+  const handleEmail = e => { setMail(e.target.value); console.log(email) }
+  const handlePassword = e => { setPassword(e.target.value); console.log(password) }
+
+  const login = e => {
+    // e.preventDefault()
+    
   }
 
-  return(
-    <GlobalContext.Provider vaalue={context}>
+  const context = {
+    email, handleEmail,
+    password, handlePassword
+  }
+
+  return (
+    <GlobalContext.Provider value={context}>
       {props.children}
     </GlobalContext.Provider>
   )
