@@ -1,5 +1,11 @@
 import { styled } from "styled-components";
 
+export const Rule = styled.div`
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
+`
+
 export const NavHead = styled.section`
   display: flex;
   justify-content: end;
@@ -7,40 +13,28 @@ export const NavHead = styled.section`
   background-color: #00000015;
 `
 
-export const SignUpContainer = styled.form`
-  margin: 0 auto;
-  width: 428px;
+export const MainContainer = styled.form`
+  margin: 20px auto;
+  width: 370px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  a {
-    color: blue;
-    text-decoration: none;
-  }
 `
 
-export const MainSection = styled.section`
-  font-size: 1.2em;
-  width: 370px;
-  margin: 0 auto 100px;
-`
-
-export const InputContainer = styled.div`
-  width: 370px;
-  /* border: 1px solid black; */
-`
-export const LoginInput = styled.input`
+export const TextInput = styled.input`
   box-sizing: border-box;
   width: 100%;
-  height: 50px;
-  margin: 5px 0;
+  height: 150px;
+  border-radius: 15px;
+  border: none;
+  background-color: #00000015;
   padding: 10px;
+  /* text-align: ; */
 `
 
-export const LoginButton = styled.button`
+export const LogoutButton = styled.button`
   background: none;
   border: none;
   color: blue;
@@ -48,8 +42,7 @@ export const LoginButton = styled.button`
   font-size: 1.25em;
   margin-right: 20px;
 `
-
-export const SignUpButton = styled.button`
+export const PostButton = styled.button`
   font-size: 1.2em;
   color: #fff;
   font-weight: 600;
@@ -57,7 +50,8 @@ export const SignUpButton = styled.button`
   width: 100%;
   height: 50px;
   border: none;
-  border-radius: 50px;
+  border-radius: 15px;
 
   background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
 `
+

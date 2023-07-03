@@ -16,7 +16,6 @@ export const LogoContainer = styled.div`
   
   img {
     max-width: 100%;
-    
   }
 `
 export const InputContainer = styled.div`
