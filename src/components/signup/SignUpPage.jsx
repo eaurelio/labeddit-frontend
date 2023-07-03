@@ -8,8 +8,16 @@ import {
   SignUpButton
 } from "./StyledSignUpPage"
 import labelogo from '../../assets/img/labe_logo.png'
+import { GlobalContext } from "../../context/GlobalContext"
+import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUpPage(props) {
+
+  const context = useContext(GlobalContext)
+  const {email, handleEmail, password, handlePassword} = context
+  const loginUrl = 'http://localhost:3003/users/login'
+  const navigate = useNavigate()
 
   const style = {
     backgroundImage: `url(${labelogo})`,

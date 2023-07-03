@@ -1,5 +1,4 @@
 export default function emailValidator(email) {
-  console.log(email)
   let user = email.substring(0, email.indexOf("@"));
   let domain = email.substring(email.indexOf("@")+ 1, email.length);
   

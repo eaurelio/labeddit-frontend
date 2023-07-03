@@ -2,19 +2,15 @@ import { useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 
 export default function GlobalState(props) {
-
+  
+  const [nickName, setNickname] = useState('')
   const [email, setMail] = useState('')
   const [password, setPassword] = useState('')
-
   const handleEmail = e => { setMail(e.target.value); console.log(email) }
   const handlePassword = e => { setPassword(e.target.value); console.log(password) }
 
-  const login = e => {
-    // e.preventDefault()
-    
-  }
-
   const context = {
+    nickName, setNickname,
     email, handleEmail,
     password, handlePassword
   }
@@ -24,5 +20,4 @@ export default function GlobalState(props) {
       {props.children}
     </GlobalContext.Provider>
   )
-
 }
