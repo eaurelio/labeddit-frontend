@@ -6,7 +6,8 @@ import {
 } from './StyledPostContent'
 
 
-export default function PostContainer(props) {
+export default function Posts(props) {
+  const {content} = props
   return (
     <>
       <Post>
@@ -14,7 +15,7 @@ export default function PostContainer(props) {
           Enviado por {}
         </PostHeader>
         <PostContent>
-          Conteúdo
+          {content}
         </PostContent>
         <PostFooter>
           Rodapé

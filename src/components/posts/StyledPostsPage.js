@@ -8,13 +8,21 @@ export const NavHead = styled.section`
 `
 
 export const MainContainer = styled.form`
+  /* border: 1px solid black; */
   margin: 20px auto;
   width: 370px;
+  /* height: 800px; */
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  `
+
+export const PostContainer = styled.div`
+  width: 370px;
+  height: 500px;
+  overflow: auto;
 `
 
 export const TextInput = styled.input`

@@ -2,19 +2,20 @@ import {
   NavHead,
   LogoutButton,
   MainContainer,
+  PostContainer,
   TextInput,
   PostButton,
   Rule
 } from './StyledPostsPage'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import labelogo from '../../assets/img/labe_logo.png'
-import PostContainer from './postContent/PostContainer'
+import Posts from './postContent/Posts'
 import { GlobalContext } from "../../context/GlobalContext"
 import axios from 'axios'
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, handlePostArea, postList, setPostList } = context
+  const { newPost, setNewPost, handlePostArea, postList, setPostList } = context
   const postPage = 'http://localhost:3003/posts'
   const userToken = localStorage.getItem('userToken')
 
@@ -25,16 +26,17 @@ export default function PostsPage() {
     backgroundSize: '40px'
   }
 
-  const getPosts = async e => {
-    e.preventDefault()
-    await axios.get(postPage,{
+  const getPosts = async () => {
+    await axios.get(postPage, {
       headers: {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response.data) })
+      .then(response => { setPostList(response.data); console.log(response.data) })
       .catch(error => console.log(error))
   }
+
+  useEffect(() => { getPosts() }, [])
 
   const sendNewPost = async () => {
     const body = {
@@ -46,7 +48,7 @@ export default function PostsPage() {
         Authorization: userToken
       }
     })
-      .then(response => console.log(response))
+      .then(response => { console.log(response); getPosts() })
       .catch(error => console.log(error))
   }
 
@@ -56,8 +58,13 @@ export default function PostsPage() {
       window.alert('O post não pode ser vazio!')
     } else {
       sendNewPost()
+      setNewPost('')
     }
   }
+
+  const posts = postList
+  .sort((x, y) => x.created_at < y.created_at)
+  .map((post, i) => <Posts key={i} content={post.content} />)
 
   return (
     <>
@@ -77,11 +84,10 @@ export default function PostsPage() {
             <PostButton type='submit' onClick={getPostContent}>
               Postar
             </PostButton>
-            <PostButton type='submit' onClick={getPosts}>
-              coisar
-            </PostButton>
             <Rule />
-            <PostContainer />
+            <PostContainer>
+              {posts}
+            </PostContainer>
           </MainContainer>
         </div>
         :

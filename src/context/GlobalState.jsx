@@ -17,7 +17,7 @@ export default function GlobalState(props) {
     name, handleName,
     email, handleEmail,
     password, handlePassword,
-    newPost, handlePostArea,
+    newPost, handlePostArea, setNewPost,
     postList, setPostList
   }
 
