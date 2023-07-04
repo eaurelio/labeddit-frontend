@@ -1,11 +1,5 @@
 import { styled } from "styled-components";
 
-export const Rule = styled.div`
-  height: 2px;
-  width: 100%;
-  background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
-`
-
 export const NavHead = styled.section`
   display: flex;
   justify-content: end;
@@ -42,6 +36,13 @@ export const LogoutButton = styled.button`
   font-size: 1.25em;
   margin-right: 20px;
 `
+
+export const Rule = styled.div`
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
+`
+
 export const PostButton = styled.button`
   font-size: 1.2em;
   color: #fff;
