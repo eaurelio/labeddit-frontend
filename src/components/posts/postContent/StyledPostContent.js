@@ -23,4 +23,21 @@ export const PostContent = styled.div`
 export const PostFooter = styled.div`
   color: gray;
   font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`
+
+export const LikesContainer = styled.div`
+  min-width: 80px;
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const LikesDislikes = styled.span`
+  font-weight: bold;
 `

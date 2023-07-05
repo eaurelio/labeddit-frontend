@@ -63,8 +63,15 @@ export default function PostsPage() {
   }
 
   const posts = postList
-  .sort((x, y) => x.created_at < y.created_at)
-  .map((post, i) => <Posts key={i} content={post.content} />)
+    .sort((x, y) => x.created_at < y.created_at)
+    .map((post, i) =>
+      <Posts
+        key={i}
+        userName={post.userName}
+        content={post.content}
+        likes={post.likes}
+        dislikes={post.dislikes}
+      />)
 
   return (
     <>

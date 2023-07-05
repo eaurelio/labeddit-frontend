@@ -22,6 +22,7 @@ export const MainContainer = styled.form`
 export const PostContainer = styled.div`
   width: 370px;
   height: 500px;
+  margin-top: 15px;
   overflow: auto;
 `
 
