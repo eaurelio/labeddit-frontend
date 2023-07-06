@@ -15,9 +15,12 @@ import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
 import { goToLoginPage } from "../../router/coordinator"
 
+import axios from 'axios'
+
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, postList, getPosts, sendNewPost, userToken } = context
+  const { newPost, setNewPost, handlePostArea, postList, setPostList, postPage } = context
+  const userToken = localStorage.getItem('userToken')
 
   const navigate = useNavigate()
 
@@ -28,7 +31,29 @@ export default function PostsPage() {
     backgroundSize: '40px'
   }
 
-  useEffect(() => { getPosts() }, [])
+  const getPosts = async () => {
+    await axios.get(postPage, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => { setPostList(response.data); console.log(response.data) })
+      .catch(error => console.log(error))
+  }
+
+  const sendNewPost = async () => {
+    const body = {
+      content: newPost
+    }
+    await axios.post(postPage, body, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => { console.log(response); getPosts() })
+      .catch(error => console.log(error))
+  }
+
 
   const getPostContent = event => {
     event.preventDefault()
@@ -41,8 +66,12 @@ export default function PostsPage() {
   }
 
   const logOut = () => {
-    localStorage.clear('userToken')
+    goToLoginPage(navigate)
+    setPostList([])
+    localStorage.removeItem('userToken')
   }
+
+  useEffect(() => { getPosts() }, [])
 
   const posts = postList
     .sort((x, y) => x.created_at < y.created_at)
@@ -58,37 +87,37 @@ export default function PostsPage() {
 
   return (
     <>
-      {userToken
-        ?
+      {/* {userToken
+        ? */}
+      <div>
+        <NavHead style={style} >
+          <LogButton onClick={logOut}>Logout</LogButton>
+        </NavHead>
+        <MainContainer>
+          <TextInput
+            value={newPost}
+            onChange={handlePostArea}
+            type='text'
+            placeholder='Escreva seu post...'
+          />
+          <PostButton type='submit' onClick={getPostContent}>
+            Postar
+          </PostButton>
+          <Rule />
+          <PostContainer>
+            {posts}
+          </PostContainer>
+        </MainContainer>
+      </div>
+      {/* :
         <div>
-          <NavHead style={style} >
-            {userToken ?
-              <LogButton>Logout</LogButton>
-              :
-              <LogButton onClick={() => {goToLoginPage(navigate)}} >Login</LogButton>
-            }
-          </NavHead>
+          <NavHead style={style} />
           <MainContainer>
-            <TextInput
-              value={newPost}
-              onChange={handlePostArea}
-              type='text'
-              placeholder='Escreva seu post...'
-            />
-            <PostButton type='submit' onClick={getPostContent}>
-              Postar
-            </PostButton>
-            <Rule />
-            <PostContainer>
-              {posts}
-            </PostContainer>
+            <h2>Usuário não autenticado!</h2>
+            <PostButton onClick={() => {goToLoginPage(navigate)}} >Login</PostButton>
           </MainContainer>
         </div>
-        :
-        <div>
-          usuário não autenticado!
-        </div>
-      }
+      } */}
 
     </>
   )

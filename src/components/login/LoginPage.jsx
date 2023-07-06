@@ -9,7 +9,7 @@ import {
 } from "./StyledLoginPage"
 import { useContext } from "react"
 import { useNavigate } from 'react-router-dom'
-import { goToPostPage } from "../../router/coordinator"
+import { goToLoginPage, goToPostPage } from "../../router/coordinator"
 import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import labbedit_logo from '../../assets/img/labeddit_logo.png'
@@ -24,12 +24,13 @@ export default function LoginPage(props) {
 
   const login = async (userLogin) => {
     const body = userLogin
-
     await axios.post(loginUrl, body)
       .then(response => {
         console.log(response.data.token)
         localStorage.setItem('userToken', response.data.token)
-        goToPostPage(navigate)
+        setInterval(() => {
+          goToPostPage(navigate)
+        },3000)
       })
       .then()
       .catch(error => {
@@ -52,7 +53,6 @@ export default function LoginPage(props) {
         login(userLogin)
       }
   }
-
 
   return (
     <LoginContainer>
@@ -78,7 +78,7 @@ export default function LoginPage(props) {
           Continuar
         </LoginButton>
         <Rule />
-        <SignUpButton>
+        <SignUpButton onClick={() => {goToLoginPage(navigate)}}>
           Crie uma conta!
         </SignUpButton>
       </InputContainer>
