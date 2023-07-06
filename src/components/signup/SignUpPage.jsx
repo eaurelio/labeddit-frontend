@@ -12,6 +12,7 @@ import { GlobalContext } from "../../context/GlobalContext"
 import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { goToPostPage } from "../../router/coordinator"
+import { goToLoginPage } from "../../router/coordinator"
 import axios from 'axios'
 import { emailValidator, passwordValidator } from "../../assets/resources/validators"
 
@@ -67,7 +68,7 @@ export default function SignUpPage(props) {
     <>
       <NavHead style={style}>
 
-        <LoginButton>Entrar</LoginButton>
+        <LoginButton onClick={() => {goToLoginPage(navigate)}} >Entrar</LoginButton>
 
       </NavHead>
 

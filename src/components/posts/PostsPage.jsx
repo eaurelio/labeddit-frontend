@@ -1,6 +1,6 @@
 import {
   NavHead,
-  LogoutButton,
+  LogButton,
   MainContainer,
   PostContainer,
   TextInput,
@@ -11,13 +11,15 @@ import { useContext, useEffect } from 'react'
 import labelogo from '../../assets/img/labe_logo.png'
 import Posts from './postContent/Posts'
 import { GlobalContext } from "../../context/GlobalContext"
-import axios from 'axios'
+
+import { useNavigate } from 'react-router-dom'
+import { goToLoginPage } from "../../router/coordinator"
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, postList, setPostList } = context
-  const postPage = 'http://localhost:3003/posts'
-  const userToken = localStorage.getItem('userToken')
+  const { newPost, setNewPost, handlePostArea, postList, getPosts, sendNewPost, userToken } = context
+
+  const navigate = useNavigate()
 
   const style = {
     backgroundImage: `url(${labelogo})`,
@@ -26,31 +28,7 @@ export default function PostsPage() {
     backgroundSize: '40px'
   }
 
-  const getPosts = async () => {
-    await axios.get(postPage, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => { setPostList(response.data); console.log(response.data) })
-      .catch(error => console.log(error))
-  }
-
   useEffect(() => { getPosts() }, [])
-
-  const sendNewPost = async () => {
-    const body = {
-      content: newPost
-    }
-
-    await axios.post(postPage, body, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => { console.log(response); getPosts() })
-      .catch(error => console.log(error))
-  }
 
   const getPostContent = event => {
     event.preventDefault()
@@ -62,11 +40,16 @@ export default function PostsPage() {
     }
   }
 
+  const logOut = () => {
+    localStorage.clear('userToken')
+  }
+
   const posts = postList
     .sort((x, y) => x.created_at < y.created_at)
     .map((post, i) =>
       <Posts
         key={i}
+        postId={post.id}
         userName={post.userName}
         content={post.content}
         likes={post.likes}
@@ -79,7 +62,11 @@ export default function PostsPage() {
         ?
         <div>
           <NavHead style={style} >
-            <LogoutButton>Logout</LogoutButton>
+            {userToken ?
+              <LogButton>Logout</LogButton>
+              :
+              <LogButton onClick={() => {goToLoginPage(navigate)}} >Login</LogButton>
+            }
           </NavHead>
           <MainContainer>
             <TextInput

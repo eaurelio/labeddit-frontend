@@ -37,7 +37,7 @@ export const TextInput = styled.input`
   /* text-align: ; */
 `
 
-export const LogoutButton = styled.button`
+export const LogButton = styled.button`
   background: none;
   border: none;
   color: blue;

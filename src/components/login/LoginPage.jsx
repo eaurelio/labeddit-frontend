@@ -18,8 +18,8 @@ import { emailValidator, passwordValidator } from "../../assets/resources/valida
 
 export default function LoginPage(props) {
   const context = useContext(GlobalContext)
-  const { email, handleEmail, password, handlePassword } = context
-  const loginUrl = 'http://localhost:3003/users/login'
+  const { email, handleEmail, password, handlePassword, loginUrl } = context
+  
   const navigate = useNavigate()
 
   const login = async (userLogin) => {

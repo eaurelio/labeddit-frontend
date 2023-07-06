@@ -36,7 +36,7 @@ export const LikesContainer = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `
 export const LikesDislikes = styled.span`
   font-weight: bold;
