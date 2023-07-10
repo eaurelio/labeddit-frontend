@@ -1,15 +1,14 @@
-export const goToPostPage = (navigate) => {
+export function goToLoginPage (navigate) {
+  navigate('/')
+}
+export function goToPostPage (navigate) {
   navigate("/posts")
 }
 
-export const goToLoginPage = (navigate) => {
-  navigate('/')
-}
-
-export const goToSignUpPage = (navigate) => {
+export function goToSignUpPage (navigate) {
   navigate('/signup')
 }
 
-export const goToErrorPage = (navigate) => {
+export function goToErrorPage (navigate) {
   navigate('/shuds')
 }

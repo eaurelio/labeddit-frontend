@@ -8,11 +8,10 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/posts" element={<PostsPage />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route index element={<LoginPage />} />
+        <Route path={"/signup"} element={<SignUpPage />} />
+        <Route path={"/posts"} element={<PostsPage />} />
+        <Route path={"*"} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   )

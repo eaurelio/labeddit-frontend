@@ -66,7 +66,7 @@ export default function PostsPage() {
   }
 
   const logOut = () => {
-    goToErrorPage(navigate)
+    goToLoginPage(navigate)
     setPostList([])
     localStorage.removeItem('userToken')
   }
@@ -87,8 +87,8 @@ export default function PostsPage() {
 
   return (
     <>
-      {/* {userToken
-        ? */}
+      {userToken
+        ?
       <div>
         <NavHead style={style} >
           <LogButton onClick={logOut}>Logout</LogButton>
@@ -109,7 +109,7 @@ export default function PostsPage() {
           </PostContainer>
         </MainContainer>
       </div>
-      {/* :
+      :
         <div>
           <NavHead style={style} />
           <MainContainer>
@@ -117,7 +117,7 @@ export default function PostsPage() {
             <PostButton onClick={() => {goToLoginPage(navigate)}} >Login</PostButton>
           </MainContainer>
         </div>
-      } */}
+      }
 
     </>
   )
