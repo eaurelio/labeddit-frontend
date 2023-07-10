@@ -33,7 +33,7 @@ export default function Posts(props) {
       }
     })
       .then(response => { console.log(response.statusText); getPosts() })
-      .catch(error => window.alert(error.response.data))
+      .catch(error => console.log(error))
   }
 
   return (
