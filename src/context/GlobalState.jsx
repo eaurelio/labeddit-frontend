@@ -17,15 +17,15 @@ export default function GlobalState(props) {
   const handlePostArea = e => { setNewPost(e.target.value); console.log(newPost) }
   const userToken = localStorage.getItem('userToken')
   
-  // const getPosts = async () => {
-  //   await axios.get(postPage, {
-  //     headers: {
-  //       Authorization: userToken
-  //     }
-  //   })
-  //     .then(response => { setPostList(response.data); console.log(response.data) })
-  //     .catch(error => console.log(error))
-  // }
+  const getPosts = async () => {
+    await axios.get(postPage, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => { setPostList(response.data); console.log(response.data) })
+      .catch(error => console.log(error))
+  }
 
   // const sendNewPost = async () => {
   //   const body = {
@@ -51,12 +51,13 @@ export default function GlobalState(props) {
   // }
 
   const context = {
-    name, handleName,
-    email, handleEmail,
-    password, handlePassword,
+    name, handleName, setName,
+    email, handleEmail, setMail,
+    password, handlePassword, setPassword,
     newPost, handlePostArea, setNewPost,
     postList, setPostList,
-    // getPosts, sendNewPost,
+    getPosts, 
+    // sendNewPost,
     // getPostContent, 
     userToken,
     loginUrl,

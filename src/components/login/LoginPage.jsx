@@ -9,11 +9,11 @@ import {
 } from "./StyledLoginPage"
 import { useContext } from "react"
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage, goToPostPage } from "../../router/coordinator"
+import { goToPostPage, goToSignUpPage } from "../../router/coordinator"
 import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import labbedit_logo from '../../assets/img/labeddit_logo.png'
-import { emailValidator, passwordValidator } from "../../assets/resources/validators"
+import { emailValidator } from "../../assets/resources/validators"
 
 
 export default function LoginPage(props) {
@@ -30,7 +30,7 @@ export default function LoginPage(props) {
         localStorage.setItem('userToken', response.data.token)
         setInterval(() => {
           goToPostPage(navigate)
-        },3000)
+        },1000)
         // .then(() => {setName(''); setMail('')})
       })
       .then()
@@ -44,10 +44,7 @@ export default function LoginPage(props) {
     event.preventDefault()
     if (!emailValidator(email)) {
       window.alert('Email inválido!')
-    } else
-      if (!passwordValidator.test(password)) {
-        window.alert('Deve-se criar uma senha segura!')
-      } else {
+    } else {
         const userLogin = {
           email, password
         }
@@ -79,7 +76,7 @@ export default function LoginPage(props) {
           Continuar
         </LoginButton>
         <Rule />
-        <SignUpButton onClick={() => {goToLoginPage(navigate)}}>
+        <SignUpButton onClick={() => goToSignUpPage(navigate)}>
           Crie uma conta!
         </SignUpButton>
       </InputContainer>

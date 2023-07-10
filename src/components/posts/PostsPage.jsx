@@ -19,7 +19,7 @@ import axios from 'axios'
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, postList, setPostList, postPage } = context
+  const { newPost, setNewPost, handlePostArea, postList, setPostList, postPage} = context
   const userToken = localStorage.getItem('userToken')
 
   const navigate = useNavigate()
@@ -66,9 +66,10 @@ export default function PostsPage() {
   }
 
   const logOut = () => {
-    goToLoginPage(navigate)
+    // goToLoginPage(navigate)
     setPostList([])
     localStorage.removeItem('userToken')
+    window.location.reload()
   }
 
   useEffect(() => { getPosts() }, [])
