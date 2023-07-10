@@ -13,7 +13,7 @@ import Posts from './postContent/Posts'
 import { GlobalContext } from "../../context/GlobalContext"
 
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage } from "../../router/coordinator"
+import { goToLoginPage, goToSignUpPage, goToErrorPage } from "../../router/coordinator"
 
 import axios from 'axios'
 
@@ -66,7 +66,7 @@ export default function PostsPage() {
   }
 
   const logOut = () => {
-    goToLoginPage(navigate)
+    goToErrorPage(navigate)
     setPostList([])
     localStorage.removeItem('userToken')
   }

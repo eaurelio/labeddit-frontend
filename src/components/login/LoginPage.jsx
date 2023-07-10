@@ -18,7 +18,7 @@ import { emailValidator, passwordValidator } from "../../assets/resources/valida
 
 export default function LoginPage(props) {
   const context = useContext(GlobalContext)
-  const { email, handleEmail, password, handlePassword, loginUrl } = context
+  const { email, handleEmail, password, handlePassword, loginUrl, setName, setMail } = context
   
   const navigate = useNavigate()
 
@@ -31,6 +31,7 @@ export default function LoginPage(props) {
         setInterval(() => {
           goToPostPage(navigate)
         },3000)
+        // .then(() => {setName(''); setMail('')})
       })
       .then()
       .catch(error => {

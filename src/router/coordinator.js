@@ -3,9 +3,13 @@ export const goToPostPage = (navigate) => {
 }
 
 export const goToLoginPage = (navigate) => {
-  navigate('/login')
+  navigate('/')
 }
 
 export const goToSignUpPage = (navigate) => {
   navigate('/signup')
+}
+
+export const goToErrorPage = (navigate) => {
+  navigate('/shuds')
 }
