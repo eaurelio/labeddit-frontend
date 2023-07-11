@@ -59,11 +59,11 @@ export default function Posts(props) {
         </PostContent>
         <PostFooter>
           <LikesContainer>
-            <FontAwesomeIcon onClick={() => likeDislike(true)} icon={faUpLong} size="sm" />
+            <FontAwesomeIcon onClick={() => likeDislike(true)} icon={faUpLong} size="lg" />
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
-            <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="sm" />
+            <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="lg" />
           </LikesContainer>
-          <FontAwesomeIcon onClick={() => window.alert('ne')} icon={faMessage} />
+          <FontAwesomeIcon onClick={() => window.alert('ne')} icon={faMessage} size="lg" />
         </PostFooter>
       </Post>
     </>
