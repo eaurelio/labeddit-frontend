@@ -13,13 +13,11 @@ import Posts from './postContent/Posts'
 import { GlobalContext } from "../../context/GlobalContext"
 
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage, goToSignUpPage, goToErrorPage } from "../../router/coordinator"
-
-import axios from 'axios'
+import { goToLoginPage} from "../../router/coordinator"
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, postList, setPostList, postPage} = context
+  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, setPostList, postPage} = context
   const userToken = localStorage.getItem('userToken')
 
   const navigate = useNavigate()
@@ -29,35 +27,7 @@ export default function PostsPage() {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: '40px',
-
-    display: 'flex',
-    flexDirection: 'row',
-    alignItens: 'space-around'
   }
-
-  const getPosts = async () => {
-    await axios.get(postPage, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => { setPostList(response.data); console.log(response.data) })
-      .catch(error => console.log(error))
-  }
-
-  const sendNewPost = async () => {
-    const body = {
-      content: newPost
-    }
-    await axios.post(postPage, body, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => { console.log(response); getPosts() })
-      .catch(error => console.log(error))
-  }
-
 
   const getPostContent = event => {
     event.preventDefault()
@@ -96,7 +66,6 @@ export default function PostsPage() {
         ?
       <div>
         <NavHead style={style} >
-          <p>ndsdf</p>
           <LogButton onClick={logOut}>Logout</LogButton>
         </NavHead>
         <MainContainer>

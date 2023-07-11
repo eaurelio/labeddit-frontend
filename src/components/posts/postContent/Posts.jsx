@@ -10,7 +10,7 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { GlobalContext } from "../../../context/GlobalContext"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons'
+import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Posts(props) {
@@ -63,7 +63,7 @@ export default function Posts(props) {
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
             <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="sm" />
           </LikesContainer>
-          Rodapé
+          <FontAwesomeIcon onClick={() => window.alert('ne')} icon={faMessage} />
         </PostFooter>
       </Post>
     </>

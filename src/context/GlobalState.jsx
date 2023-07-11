@@ -27,18 +27,18 @@ export default function GlobalState(props) {
       .catch(error => console.log(error))
   }
 
-  // const sendNewPost = async () => {
-  //   const body = {
-  //     content: newPost
-  //   }
-  //   await axios.post(postPage, body, {
-  //     headers: {
-  //       Authorization: userToken
-  //     }
-  //   })
-  //     .then(response => { console.log(response); getPosts() })
-  //     .catch(error => console.log(error))
-  // }
+  const sendNewPost = async () => {
+    const body = {
+      content: newPost
+    }
+    await axios.post(postPage, body, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => { console.log(response); getPosts() })
+      .catch(error => console.log(error))
+  }
 
   // const getPostContent = event => {
   //   event.preventDefault()
@@ -57,7 +57,7 @@ export default function GlobalState(props) {
     newPost, handlePostArea, setNewPost,
     postList, setPostList,
     getPosts, 
-    // sendNewPost,
+    sendNewPost,
     // getPostContent, 
     userToken,
     loginUrl,

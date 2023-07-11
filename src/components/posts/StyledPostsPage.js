@@ -2,16 +2,14 @@ import { styled } from "styled-components";
 
 export const NavHead = styled.section`
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   height: 50px;
   background-color: #00000015;
 `
 
 export const MainContainer = styled.form`
-  /* border: 1px solid black; */
   margin: 20px auto;
   width: 370px;
-  /* height: 800px; */
 
   display: flex;
   flex-direction: column;
@@ -26,7 +24,8 @@ export const PostContainer = styled.div`
   overflow: auto;
 `
 
-export const TextInput = styled.input`
+export const TextInput = styled.textarea`
+  /* font-family: Trebuchet, */
   box-sizing: border-box;
   width: 100%;
   height: 150px;
@@ -34,7 +33,7 @@ export const TextInput = styled.input`
   border: none;
   background-color: #00000015;
   padding: 10px;
-  /* text-align: ; */
+  /* word-wrap: break-word; */
 `
 
 export const LogButton = styled.button`
