@@ -28,7 +28,11 @@ export default function PostsPage() {
     backgroundImage: `url(${labelogo})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    backgroundSize: '40px'
+    backgroundSize: '40px',
+
+    display: 'flex',
+    flexDirection: 'row',
+    alignItens: 'space-around'
   }
 
   const getPosts = async () => {
@@ -92,6 +96,7 @@ export default function PostsPage() {
         ?
       <div>
         <NavHead style={style} >
+          <p>ndsdf</p>
           <LogButton onClick={logOut}>Logout</LogButton>
         </NavHead>
         <MainContainer>

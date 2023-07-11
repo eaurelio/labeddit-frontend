@@ -33,7 +33,19 @@ export default function Posts(props) {
       }
     })
       .then(response => { console.log(response.statusText); getPosts() })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error.response.data)
+        switch (error.response.data) {
+          case 'Post não encontrado!':
+            window.alert(error.response.data)
+            break
+          case 'Você não pode curtir seu próprio post!':
+            window.alert(error.response.data)
+            break
+          default:
+            window.alert(error.response.data)
+        }
+      })
   }
 
   return (
