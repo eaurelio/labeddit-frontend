@@ -9,12 +9,16 @@ import {
 import axios from 'axios'
 import { useContext } from 'react'
 import { GlobalContext } from "../../../context/GlobalContext"
+import { useNavigate } from 'react-router-dom'
+import { goToCommentPage } from "../../../router/coordinator"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Posts(props) {
   const context = useContext(GlobalContext)
+  const navigate = useNavigate()
   const { getPosts } = context
   const { postId, content, userName, likes, dislikes } = props
 
@@ -63,7 +67,7 @@ export default function Posts(props) {
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
             <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="lg" />
           </LikesContainer>
-          <FontAwesomeIcon onClick={() => window.alert('ne')} icon={faMessage} size="lg" />
+          <FontAwesomeIcon onClick={() => goToCommentPage(navigate, postId)} icon={faMessage} size="lg" />
         </PostFooter>
       </Post>
     </>

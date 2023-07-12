@@ -40,6 +40,11 @@ export default function GlobalState(props) {
       .catch(error => console.log(error))
   }
 
+  const getComments = async (postId) => {
+    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+
+  }
+
   // const getPostContent = event => {
   //   event.preventDefault()
   //   if (newPost.length < 1) {

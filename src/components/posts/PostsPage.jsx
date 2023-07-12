@@ -7,17 +7,16 @@ import {
   PostButton,
   Rule
 } from './StyledPostsPage'
-import { useContext, useEffect } from 'react'
 import labelogo from '../../assets/img/labe_logo.png'
-import Posts from './postContent/Posts'
+import { useContext, useEffect } from 'react'
 import { GlobalContext } from "../../context/GlobalContext"
-
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage} from "../../router/coordinator"
+import { goToLoginPage } from "../../router/coordinator"
+import Posts from './postContent/Posts'
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, setPostList, postPage} = context
+  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, setPostList } = context
   const userToken = localStorage.getItem('userToken')
 
   const navigate = useNavigate()
@@ -64,32 +63,32 @@ export default function PostsPage() {
     <>
       {userToken
         ?
-      <div>
-        <NavHead style={style} >
-          <LogButton onClick={logOut}>Logout</LogButton>
-        </NavHead>
-        <MainContainer>
-          <TextInput
-            value={newPost}
-            onChange={handlePostArea}
-            type='text'
-            placeholder='Escreva seu post...'
-          />
-          <PostButton type='submit' onClick={getPostContent}>
-            Postar
-          </PostButton>
-          <Rule />
-          <PostContainer>
-            {posts}
-          </PostContainer>
-        </MainContainer>
-      </div>
-      :
+        <div>
+          <NavHead style={style} >
+            <LogButton onClick={logOut}>Logout</LogButton>
+          </NavHead>
+          <MainContainer>
+            <TextInput
+              value={newPost}
+              onChange={handlePostArea}
+              type='text'
+              placeholder='Escreva seu post...'
+            />
+            <PostButton type='submit' onClick={getPostContent}>
+              Postar
+            </PostButton>
+            <Rule />
+            <PostContainer>
+              {posts}
+            </PostContainer>
+          </MainContainer>
+        </div>
+        :
         <div>
           <NavHead style={style} />
           <MainContainer>
             <h2>Usuário não autenticado!</h2>
-            <PostButton onClick={() => {goToLoginPage(navigate)}} >Login</PostButton>
+            <PostButton onClick={() => { goToLoginPage(navigate) }} >Login</PostButton>
           </MainContainer>
         </div>
       }

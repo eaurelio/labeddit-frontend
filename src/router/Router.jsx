@@ -12,7 +12,7 @@ export default function Router() {
         <Route index element={<LoginPage />} />
         <Route path={"/signup"} element={<SignUpPage />} />
         <Route path={"/posts"} element={<PostsPage />} />
-        <Route path={"/comments"} element={<CommentPage />} />
+        <Route path={"/comments/:postId"} element={<CommentPage />} />
         <Route path={"*"} element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

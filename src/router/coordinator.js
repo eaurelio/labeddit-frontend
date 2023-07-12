@@ -9,6 +9,10 @@ export function goToSignUpPage (navigate) {
   navigate('/signup')
 }
 
+export function goToCommentPage (navigate, postId) {
+  navigate(`/comments/${postId}`)
+}
+
 export function goToErrorPage (navigate) {
   navigate('/shuds')
 }
