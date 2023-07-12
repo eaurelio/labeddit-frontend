@@ -11,6 +11,7 @@ export default function GlobalState(props) {
   const [password, setPassword] = useState('')
   const [newPost, setNewPost] = useState('')
   const [postList, setPostList] = useState([])
+  const [commentList, setCommentList] = useState([])
   const handleName = e => { setName(e.target.value); console.log(name) }
   const handleEmail = e => { setMail(e.target.value); console.log(email) }
   const handlePassword = e => { setPassword(e.target.value); console.log(password) }
@@ -23,7 +24,7 @@ export default function GlobalState(props) {
         Authorization: userToken
       }
     })
-      .then(response => { setPostList(response.data); console.log(response.data) })
+      .then(response => { setPostList(response.data) })
       .catch(error => console.log(error))
   }
 
@@ -40,10 +41,17 @@ export default function GlobalState(props) {
       .catch(error => console.log(error))
   }
 
-  const getComments = async (postId) => {
-    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
-
-  }
+  // const getComments = async (postId) => {
+  //   const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+  
+  //   await axios.get(commentsPage, {
+  //     headers: {
+  //       Authorization: userToken
+  //     }
+  //   })
+  //     .then(response => console.log(response))
+  //     .catch(error => console.log(error))
+  // }
 
   // const getPostContent = event => {
   //   event.preventDefault()
@@ -61,8 +69,9 @@ export default function GlobalState(props) {
     password, handlePassword, setPassword,
     newPost, handlePostArea, setNewPost,
     postList, setPostList,
-    getPosts, 
-    sendNewPost,
+    commentList, setCommentList,
+    getPosts, sendNewPost,
+    // getComments, 
     // getPostContent, 
     userToken,
     loginUrl,
