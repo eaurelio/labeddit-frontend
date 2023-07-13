@@ -13,6 +13,7 @@ import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
 import { goToLoginPage } from "../../router/coordinator"
 import Posts from './postContent/Posts'
+// const userToken = localStorage.getItem('userToken')
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
@@ -26,6 +27,7 @@ export default function PostsPage() {
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: '40px',
+    justifyContent: 'end'
   }
 
   const getPostContent = event => {
@@ -38,14 +40,7 @@ export default function PostsPage() {
     }
   }
 
-  // const logOut = () => {
-  //   // goToLoginPage(navigate)
-  //   setPostList([])
-  //   localStorage.removeItem('userToken')
-  //   window.location.reload()
-  // }
-
-  useEffect(() => { getPosts() }, [])
+  useEffect(() => { getPosts(userToken) }, [])
 
   const posts = postList
     .sort((x, y) => x.created_at < y.created_at)

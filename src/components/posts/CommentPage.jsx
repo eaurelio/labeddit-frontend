@@ -10,14 +10,17 @@ import {
 
 import labelogo from '../../assets/img/labe_logo.png'
 
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage } from "../../router/coordinator"
+import { goToPostPage } from "../../router/coordinator"
 import { useParams } from "react-router-dom"
 import Posts from "./postContent/Posts";
 import Comments from "./postContent/Comments";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function CommentPage(props) {
   const style = {
@@ -26,10 +29,16 @@ export default function CommentPage(props) {
     backgroundPosition: 'center',
     backgroundSize: '40px',
   }
+  const styleCrossButton = {
+    fontSize: '2em',
+    margin: '8px 15px',
+    color: 'gray'
+  }
 
+  const navigate = useNavigate()
   const context = useContext(GlobalContext)
   const { postId } = useParams()
-  const { 
+  const {
     postList, getPosts,
     userToken,
     commentList, getComments,
@@ -40,17 +49,21 @@ export default function CommentPage(props) {
 
   const currentPost = postList.filter(el => el.id === postId)
 
-  useEffect(() => getPosts,[])
+  useEffect(() => getPosts, [])
   useEffect(() => async () => {
-      const commentsPage = `http://localhost:3003/posts/comment/${postId}`
-      await axios.get(commentsPage, {
-        headers: {
-          Authorization: userToken
-        }
-      })
-        .then(response => { setCommentList(response.data); console.log(response.data) })
-        .catch(error => console.log(error))
-    }, [])
+    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+    await axios.get(commentsPage, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => {
+        setCommentList(response.data)
+        // console.log(response.data)
+      }
+      )
+      .catch(error => console.log(error))
+  }, [])
 
   const comments = commentList.map(comment => <Comments
     key={comment.id}
@@ -72,19 +85,23 @@ export default function CommentPage(props) {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response); getComments(postId)})
+      .then(response => {
+        getComments(postId)
+        // console.log(response)
+      })
       .catch(error => console.log(error))
   }
-  
+
   const getComment = event => {
     event.preventDefault()
     sendNewComment(newComment)
     setNewComment('')
-    
+
   }
   return (
     <>
       <NavHead style={style} >
+        <FontAwesomeIcon onClick={() => goToPostPage(navigate)} style={styleCrossButton} icon={faXmark} />
         <LogButton onClick={logOut}>Logout</LogButton>
       </NavHead>
       <MainContainer>
@@ -97,10 +114,10 @@ export default function CommentPage(props) {
           dislikes={currentPost[0]?.dislikes}
         />
         <TextInput
-        value={newComment}
-        onChange={handleCommentArea}
-        type='text'
-        placeholder='Escreva seu comentário...'
+          value={newComment}
+          onChange={handleCommentArea}
+          type='text'
+          placeholder='Escreva seu comentário...'
         />
         <PostButton type='submit' onClick={getComment}>
           Comentar

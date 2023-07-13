@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const NavHead = styled.section`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 50px;
   background-color: #00000015;
 `

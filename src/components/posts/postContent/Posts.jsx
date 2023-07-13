@@ -20,12 +20,10 @@ export default function Posts(props) {
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
   const { getPosts } = context
-  const { postId, content, userName, likes, dislikes,
-    test, setTest } = props
+  const { postId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
     const likeUrl = `http://localhost:3003/posts/${postId}/like`
-    console.log(likeUrl)
     const body = {
       like: event
     }
@@ -37,7 +35,10 @@ export default function Posts(props) {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response.statusText); getPosts() })
+      .then(response => {
+        getPosts()
+        // console.log(response.statusText)
+      })
       .catch(error => {
         console.log(error.response.data)
         switch (error.response.data) {
@@ -57,7 +58,6 @@ export default function Posts(props) {
     goToCommentPage(navigate, postId)
   }
 
-
   return (
     <>
       <Post>
@@ -73,7 +73,7 @@ export default function Posts(props) {
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
             <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="lg" />
           </LikesContainer>
-            <FontAwesomeIcon onClick={handeCommentPage} icon={faMessage} size="lg" />
+          <FontAwesomeIcon onClick={handeCommentPage} icon={faMessage} size="lg" />
         </PostFooter>
       </Post>
     </>

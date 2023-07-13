@@ -9,22 +9,19 @@ import {
 import axios from 'axios'
 import { useContext } from 'react'
 import { GlobalContext } from "../../../context/GlobalContext"
-import { useNavigate } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-icons'
+import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Comments (props) {
-  console.log(props)
+export default function Comments(props) {
+  // console.log(props)
   const context = useContext(GlobalContext)
-  const navigate = useNavigate()
   const { getComments } = context
   const { postId, commentId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
     const likeUrl = `http://localhost:3003/posts/comment/${commentId}/like`
-    console.log(likeUrl)
     const body = {
       like: event
     }
@@ -36,7 +33,10 @@ export default function Comments (props) {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response.statusText); getComments(postId) })
+      .then(response => {
+        getComments(postId)
+        // console.log(response.statusText)
+      })
       .catch(error => {
         console.log(error.response.data)
         switch (error.response.data) {

@@ -28,12 +28,10 @@ export default function LoginPage(props) {
       .then(response => {
         console.log(response.data.token)
         localStorage.setItem('userToken', response.data.token)
-        setInterval(() => {
-          goToPostPage(navigate)
-        },1000)
-        // .then(() => {setName(''); setMail('')})
       })
-      .then()
+      .then(response => setInterval(() => {
+        goToPostPage(navigate)
+      },1000))
       .catch(error => {
         console.log(error)
         window.alert('usuário ou senha incorretos!')

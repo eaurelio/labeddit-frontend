@@ -4,6 +4,7 @@ import axios from 'axios'
 const loginUrl = 'http://localhost:3003/users/login'
 const postPage = 'http://localhost:3003/posts'
 
+
 export default function GlobalState(props) {
   const [name, setName] = useState('')
   const [email, setMail] = useState('')
@@ -19,10 +20,10 @@ export default function GlobalState(props) {
   const handleCommentArea = e => { setNewComment(e.target.value); console.log(newComment) }
   const userToken = localStorage.getItem('userToken')
 
-  const getPosts = async () => {
+  const getPosts = async (Token = userToken) => {
     await axios.get(postPage, {
       headers: {
-        Authorization: userToken
+        Authorization: Token
       }
     })
       .then(response => { setPostList(response.data) })
