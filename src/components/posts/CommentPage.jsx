@@ -32,10 +32,10 @@ export default function CommentPage(props) {
   const { 
     postList, getPosts,
     userToken,
-    commentList,
-    setCommentList, sendNewComment,
+    commentList, getComments,
+    setCommentList,
     logOut,
-    newComment, handleCommentArea
+    newComment, handleCommentArea, setNewComment
   } = context
 
   const currentPost = postList.filter(el => el.id === postId)
@@ -62,13 +62,32 @@ export default function CommentPage(props) {
     postId={postId}
   />)
 
+  const sendNewComment = async (newComment) => {
+    const commentPage = `http://localhost:3003/posts/comment/${postId}`
+    const body = {
+      content: newComment
+    }
+    await axios.post(commentPage, body, {
+      headers: {
+        Authorization: userToken
+      }
+    })
+      .then(response => { console.log(response); getComments(postId)})
+      .catch(error => console.log(error))
+  }
+  
+  const getComment = event => {
+    event.preventDefault()
+    sendNewComment(newComment)
+    setNewComment('')
+    
+  }
   return (
     <>
       <NavHead style={style} >
         <LogButton onClick={logOut}>Logout</LogButton>
       </NavHead>
       <MainContainer>
-        {postId}
         <Posts
           key={currentPost[0]?.id}
           postId={currentPost[0]?.id}
@@ -83,7 +102,7 @@ export default function CommentPage(props) {
         type='text'
         placeholder='Escreva seu comentário...'
         />
-        <PostButton type='submit' onClick={() => sendNewComment(postId)}>
+        <PostButton type='submit' onClick={getComment}>
           Comentar
         </PostButton>
         <Rule />

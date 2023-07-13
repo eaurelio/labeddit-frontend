@@ -53,19 +53,6 @@ export default function GlobalState(props) {
       .catch(error => console.log(error))
   }
 
-  const sendNewComment = async (postId) => {
-    const commentPage = `http://localhost:3003/posts/comment/${postId}`
-    const body = {
-      content: newPost
-    }
-    await axios.post(commentPage, body, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => { console.log(response); getComments(postId) })
-      .catch(error => console.log(error))
-  }
   const logOut = () => {
     setPostList([])
     localStorage.removeItem('userToken')
@@ -77,11 +64,11 @@ export default function GlobalState(props) {
     email, handleEmail, setMail,
     password, handlePassword, setPassword,
     newPost, handlePostArea, setNewPost,
-    newComment, handleCommentArea,
+    newComment, handleCommentArea, setNewComment,
     postList, setPostList,
     commentList, setCommentList,
     getPosts, sendNewPost,
-    getComments, sendNewComment,
+    getComments,
     userToken,
     loginUrl,
     postPage,
