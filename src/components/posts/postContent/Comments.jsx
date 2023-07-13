@@ -10,21 +10,20 @@ import axios from 'axios'
 import { useContext } from 'react'
 import { GlobalContext } from "../../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
-import { goToCommentPage } from "../../../router/coordinator"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Posts(props) {
+export default function Comments (props) {
+  console.log(props)
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
-  const { getPosts } = context
-  const { postId, content, userName, likes, dislikes,
-    test, setTest } = props
+  const { getComments } = context
+  const { postId, commentId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
-    const likeUrl = `http://localhost:3003/posts/${postId}/like`
+    const likeUrl = `http://localhost:3003/posts/comment/${commentId}/like`
     console.log(likeUrl)
     const body = {
       like: event
@@ -37,7 +36,7 @@ export default function Posts(props) {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response.statusText); getPosts() })
+      .then(response => { console.log(response.statusText); getComments(postId) })
       .catch(error => {
         console.log(error.response.data)
         switch (error.response.data) {
@@ -52,11 +51,6 @@ export default function Posts(props) {
         }
       })
   }
-
-  const handeCommentPage = () => {
-    goToCommentPage(navigate, postId)
-  }
-
 
   return (
     <>
@@ -73,7 +67,6 @@ export default function Posts(props) {
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
             <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="lg" />
           </LikesContainer>
-            <FontAwesomeIcon onClick={handeCommentPage} icon={faMessage} size="lg" />
         </PostFooter>
       </Post>
     </>

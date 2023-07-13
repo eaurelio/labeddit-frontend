@@ -10,13 +10,14 @@ import {
 
 import labelogo from '../../assets/img/labe_logo.png'
 
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
 import { goToLoginPage } from "../../router/coordinator"
 import { useParams } from "react-router-dom"
 import Posts from "./postContent/Posts";
+import Comments from "./postContent/Comments";
 
 export default function CommentPage(props) {
   const style = {
@@ -28,55 +29,63 @@ export default function CommentPage(props) {
 
   const context = useContext(GlobalContext)
   const { postId } = useParams()
-  const { postList, userToken, commentList, setCommentList } = context
+  const { 
+    postList, getPosts,
+    userToken,
+    commentList,
+    setCommentList, sendNewComment,
+    logOut,
+    newComment, handleCommentArea
+  } = context
+
   const currentPost = postList.filter(el => el.id === postId)
 
-  console.log(currentPost)
-
+  useEffect(() => getPosts,[])
   useEffect(() => async () => {
-    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
-    await axios.get(commentsPage, {
-      headers: {
-        Authorization: userToken
-      }
-    })
-      .then(response => {setCommentList(response.data); console.log(response.data)})
-      .catch(error => console.log(error))
-  },[])
+      const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+      await axios.get(commentsPage, {
+        headers: {
+          Authorization: userToken
+        }
+      })
+        .then(response => { setCommentList(response.data); console.log(response.data) })
+        .catch(error => console.log(error))
+    }, [])
 
-  const comments = commentList.map(comment => <Posts 
+  const comments = commentList.map(comment => <Comments
     key={comment.id}
-    postId={comment.id}
+    commentId={comment.id}
     userName={comment.userName}
     content={comment.content}
     likes={comment.likes}
     dislikes={comment.dislikes}
-    />)
+    postId={postId}
+  />)
 
   return (
     <>
       <NavHead style={style} >
-        {/* <LogButton onClick={'logOut'}>Logout</LogButton> */}
+        <LogButton onClick={logOut}>Logout</LogButton>
       </NavHead>
       <MainContainer>
         {postId}
         <Posts
-          key={currentPost[0].id}
-          postId={currentPost[0].id}
-          userName={currentPost[0].userName}
-          content={currentPost[0].content}
-          likes={currentPost[0].likes}
-          dislikes={currentPost[0].dislikes}
+          key={currentPost[0]?.id}
+          postId={currentPost[0]?.id}
+          userName={currentPost[0]?.userName}
+          content={currentPost[0]?.content}
+          likes={currentPost[0]?.likes}
+          dislikes={currentPost[0]?.dislikes}
         />
         <TextInput
-        // value={'newPost'}
-        // onChange={'handlePostArea'}
-        // type='text'
-        // placeholder='Escreva seu post...'
+        value={newComment}
+        onChange={handleCommentArea}
+        type='text'
+        placeholder='Escreva seu comentário...'
         />
-        {/* <PostButton type='submit' onClick={'getPostContent'}>
-          Postar
-        </PostButton> */}
+        <PostButton type='submit' onClick={() => sendNewComment(postId)}>
+          Comentar
+        </PostButton>
         <Rule />
         <PostContainer>
           {comments}

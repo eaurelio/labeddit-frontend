@@ -16,7 +16,7 @@ import Posts from './postContent/Posts'
 
 export default function PostsPage() {
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, setPostList } = context
+  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, logOut } = context
   const userToken = localStorage.getItem('userToken')
 
   const navigate = useNavigate()
@@ -38,12 +38,12 @@ export default function PostsPage() {
     }
   }
 
-  const logOut = () => {
-    // goToLoginPage(navigate)
-    setPostList([])
-    localStorage.removeItem('userToken')
-    window.location.reload()
-  }
+  // const logOut = () => {
+  //   // goToLoginPage(navigate)
+  //   setPostList([])
+  //   localStorage.removeItem('userToken')
+  //   window.location.reload()
+  // }
 
   useEffect(() => { getPosts() }, [])
 
@@ -57,6 +57,7 @@ export default function PostsPage() {
         content={post.content}
         likes={post.likes}
         dislikes={post.dislikes}
+        enableComment={true}
       />)
 
   return (

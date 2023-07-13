@@ -46,6 +46,7 @@ export const LogButton = styled.button`
 `
 
 export const Rule = styled.div`
+  margin-top: 30px;
   height: 2px;
   width: 100%;
   background: linear-gradient(90deg, #FF6489 0%, #F9B24E 100%);
@@ -55,7 +56,7 @@ export const PostButton = styled.button`
   font-size: 1.2em;
   color: #fff;
   font-weight: 600;
-  margin: 30px 0;
+  margin-top: 30px;
   width: 100%;
   height: 50px;
   border: none;
