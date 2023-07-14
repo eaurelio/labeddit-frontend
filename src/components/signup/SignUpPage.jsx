@@ -19,8 +19,8 @@ import { emailValidator, passwordValidator } from "../../assets/resources/valida
 export default function SignUpPage(props) {
 
   const context = useContext(GlobalContext)
-  const {name, handleName, email, handleEmail, password, handlePassword} = context
-  const signUpUrl = 'http://localhost:3003/users/signup'
+  const {name, handleName, email, handleEmail, password, handlePassword, baseUrl} = context
+  const signUpUrl = `${baseUrl}/users/signup` 
   const navigate = useNavigate()
 
   const style = {
@@ -41,7 +41,9 @@ export default function SignUpPage(props) {
       })
       .catch(error => {
         console.log(error)
-        window.alert('usuário ou senha incorretos!')
+        if(error.response.data) {
+          window.alert(error.response.data)
+        }
       })
 
   }

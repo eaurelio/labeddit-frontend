@@ -18,7 +18,7 @@ import { emailValidator } from "../../assets/resources/validators"
 
 export default function LoginPage(props) {
   const context = useContext(GlobalContext)
-  const { email, handleEmail, password, handlePassword, loginUrl, setName, setMail } = context
+  const { email, handleEmail, password, handlePassword, loginUrl } = context
   
   const navigate = useNavigate()
 

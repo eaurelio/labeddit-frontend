@@ -17,11 +17,11 @@ import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons'
 export default function Comments(props) {
   // console.log(props)
   const context = useContext(GlobalContext)
-  const { getComments } = context
+  const { getComments,baseUrl } = context
   const { postId, commentId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
-    const likeUrl = `http://localhost:3003/posts/comment/${commentId}/like`
+    const likeUrl = `${baseUrl}/posts/comment/${commentId}/like`
     const body = {
       like: event
     }

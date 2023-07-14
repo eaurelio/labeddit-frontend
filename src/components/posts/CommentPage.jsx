@@ -19,7 +19,6 @@ import { useParams } from "react-router-dom"
 import Posts from "./postContent/Posts";
 import Comments from "./postContent/Comments";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function CommentPage(props) {
@@ -43,7 +42,7 @@ export default function CommentPage(props) {
     userToken,
     commentList, getComments,
     setCommentList,
-    logOut,
+    logOut, baseUrl,
     newComment, handleCommentArea, setNewComment
   } = context
 
@@ -51,7 +50,7 @@ export default function CommentPage(props) {
 
   useEffect(() => getPosts, [])
   useEffect(() => async () => {
-    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+    const commentsPage = `${baseUrl}/posts/comment/${postId}`
     await axios.get(commentsPage, {
       headers: {
         Authorization: userToken
@@ -76,7 +75,7 @@ export default function CommentPage(props) {
   />)
 
   const sendNewComment = async (newComment) => {
-    const commentPage = `http://localhost:3003/posts/comment/${postId}`
+    const commentPage = `${baseUrl}/posts/comment/${postId}`
     const body = {
       content: newComment
     }

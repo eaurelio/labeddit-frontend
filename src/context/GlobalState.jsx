@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 import axios from 'axios'
-const loginUrl = 'http://localhost:3003/users/login'
-const postPage = 'http://localhost:3003/posts'
+
+const baseUrl = `https://deploy-backend-test-yxah.onrender.com`
+const loginUrl = `${baseUrl}/users/login`
+const postPage = `${baseUrl}/posts`
 
 
 export default function GlobalState(props) {
@@ -31,7 +33,7 @@ export default function GlobalState(props) {
   }
 
   const getComments = async (postId) => {
-    const commentsPage = `http://localhost:3003/posts/comment/${postId}`
+    const commentsPage = `${baseUrl}/posts/comment/${postId}`
     await axios.get(commentsPage, {
       headers: {
         Authorization: userToken
@@ -73,7 +75,8 @@ export default function GlobalState(props) {
     userToken,
     loginUrl,
     postPage,
-    logOut
+    logOut,
+    baseUrl
   }
 
   return (

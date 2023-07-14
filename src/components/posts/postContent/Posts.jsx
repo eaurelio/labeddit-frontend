@@ -19,11 +19,11 @@ import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-ico
 export default function Posts(props) {
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
-  const { getPosts } = context
+  const { getPosts,baseUrl } = context
   const { postId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
-    const likeUrl = `http://localhost:3003/posts/${postId}/like`
+    const likeUrl = `${baseUrl}/posts/${postId}/like`
     const body = {
       like: event
     }
