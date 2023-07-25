@@ -73,7 +73,7 @@ export default function Posts(props) {
             <LikesDislikes>{likes - dislikes}</LikesDislikes>
             <FontAwesomeIcon onClick={() => likeDislike(false)} icon={faDownLong} size="lg" />
           </LikesContainer>
-          <FontAwesomeIcon onClick={handeCommentPage} icon={faMessage} size="lg" />
+          <FontAwesomeIcon onClick={() => handeCommentPage()} icon={faMessage} size="lg" />
         </PostFooter>
       </Post>
     </>

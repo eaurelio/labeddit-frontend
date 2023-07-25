@@ -11,16 +11,18 @@ import labelogo from '../../assets/img/labe_logo.png'
 import { useContext, useEffect } from 'react'
 import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage } from "../../router/coordinator"
+import { goToLoginPage, goToErrorPage, goToSignUpPage } from "../../router/coordinator"
 import Posts from './postContent/Posts'
 // const userToken = localStorage.getItem('userToken')
 
 export default function PostsPage() {
+
+  const navigate = useNavigate()
   const context = useContext(GlobalContext)
   const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, logOut } = context
   const userToken = localStorage.getItem('userToken')
 
-  const navigate = useNavigate()
+  useEffect(() => { getPosts(userToken) }, [])
 
   const style = {
     backgroundImage: `url(${labelogo})`,
@@ -40,8 +42,6 @@ export default function PostsPage() {
     }
   }
 
-  useEffect(() => { getPosts(userToken) }, [])
-
   const posts = postList
     .sort((x, y) => x.created_at < y.created_at)
     .map((post, i) =>
@@ -57,9 +57,9 @@ export default function PostsPage() {
 
   return (
     <>
-      {userToken
-        ?
-        <div>
+      {userToken ?
+        < div >
+          <button onClick={() => goToErrorPage(navigate)} >Goto</button>
           <NavHead style={style} >
             <LogButton onClick={logOut}>Logout</LogButton>
           </NavHead>
@@ -78,7 +78,7 @@ export default function PostsPage() {
               {posts}
             </PostContainer>
           </MainContainer>
-        </div>
+        </div >
         :
         <div>
           <NavHead style={style} />
@@ -88,7 +88,29 @@ export default function PostsPage() {
           </MainContainer>
         </div>
       }
-
     </>
   )
+  // return (
+  //   < div >
+  //     <button onClick={() => goToSignUpPage(navigate)} >Goto</button>
+  //     <NavHead style={style} >
+  //       <LogButton onClick={logOut}>Logout</LogButton>
+  //     </NavHead>
+  //     <MainContainer>
+  //       <TextInput
+  //         value={newPost}
+  //         onChange={handlePostArea}
+  //         type='text'
+  //         placeholder='Escreva seu post...'
+  //       />
+  //       <PostButton type='submit' onClick={getPostContent}>
+  //         Postar
+  //       </PostButton>
+  //       <Rule />
+  //       <PostContainer>
+  //         {posts}
+  //       </PostContainer>
+  //     </MainContainer>
+  //   </div >
+  // )
 }

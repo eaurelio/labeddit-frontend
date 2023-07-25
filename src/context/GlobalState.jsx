@@ -20,6 +20,7 @@ export default function GlobalState(props) {
   const handlePassword = e => { setPassword(e.target.value); console.log(password) }
   const handlePostArea = e => { setNewPost(e.target.value); console.log(newPost) }
   const handleCommentArea = e => { setNewComment(e.target.value); console.log(newComment) }
+  const [loading, setLoading] = useState(true)
   const userToken = localStorage.getItem('userToken')
 
   const getPosts = async (Token = userToken) => {
@@ -28,7 +29,9 @@ export default function GlobalState(props) {
         Authorization: Token
       }
     })
+      // .then(() => setLoading(true))
       .then(response => { setPostList(response.data) })
+      .then(() => setLoading(false))
       .catch(error => console.log(error))
   }
 
@@ -75,7 +78,7 @@ export default function GlobalState(props) {
     userToken,
     loginUrl,
     postPage,
-    logOut,
+    logOut, loading,
     baseUrl
   }
 

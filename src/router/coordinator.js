@@ -1,18 +1,19 @@
-export function goToLoginPage (navigate) {
-  navigate('/')
-}
-export function goToPostPage (navigate) {
-  navigate("/posts")
+export const goToLoginPage = (navigate) => {
+  navigate("/")
 }
 
-export function goToSignUpPage (navigate) {
-  navigate('/signup')
+export const goToSignUpPage = navigate => {
+  navigate("/signup")
 }
 
-export function goToCommentPage (navigate, postId) {
+export const goToCommentPage = (navigate, postId) => {
   navigate(`/comments/${postId}`)
 }
 
-export function goToErrorPage (navigate) {
-  navigate('/shuds')
+export const goToErrorPage = navigate => {
+  navigate("*")
+}
+
+export const goToPostPage = (navigate) => {
+  navigate("/posts")
 }
