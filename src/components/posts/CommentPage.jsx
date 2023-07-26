@@ -14,7 +14,7 @@ import { useContext, useEffect } from 'react'
 import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
-import { goToPostPage } from "../../router/coordinator"
+import { goToPostPage, goToLoginPage } from "../../router/coordinator"
 import { useParams } from "react-router-dom"
 import Posts from "./postContent/Posts";
 import Comments from "./postContent/Comments";
@@ -58,7 +58,6 @@ export default function CommentPage(props) {
     })
       .then(response => {
         setCommentList(response.data)
-        // console.log(response.data)
       }
       )
       .catch(error => console.log(error))
@@ -97,35 +96,78 @@ export default function CommentPage(props) {
     setNewComment('')
 
   }
+  // return (
+  //   <>
+  // <NavHead style={style} >
+  //   <FontAwesomeIcon onClick={() => goToPostPage(navigate)} style={styleCrossButton} icon={faXmark} />
+  //   <LogButton onClick={logOut}>Logout</LogButton>
+  // </NavHead>
+  // <MainContainer>
+  //   <Posts
+  //     key={currentPost[0]?.id}
+  //     postId={currentPost[0]?.id}
+  //     userName={currentPost[0]?.userName}
+  //     content={currentPost[0]?.content}
+  //     likes={currentPost[0]?.likes}
+  //     dislikes={currentPost[0]?.dislikes}
+  //   />
+  //   <TextInput
+  //     value={newComment}
+  //     onChange={handleCommentArea}
+  //     type='text'
+  //     placeholder='Escreva seu comentário...'
+  //   />
+  //   <PostButton type='submit' onClick={getComment}>
+  //     Comentar
+  //   </PostButton>
+  //   <Rule />
+  //   <PostContainer>
+  //     {comments}
+  //   </PostContainer>
+  // </MainContainer>
+  //   </>
+  // )
   return (
     <>
-      <NavHead style={style} >
-        <FontAwesomeIcon onClick={() => goToPostPage(navigate)} style={styleCrossButton} icon={faXmark} />
-        <LogButton onClick={logOut}>Logout</LogButton>
-      </NavHead>
-      <MainContainer>
-        <Posts
-          key={currentPost[0]?.id}
-          postId={currentPost[0]?.id}
-          userName={currentPost[0]?.userName}
-          content={currentPost[0]?.content}
-          likes={currentPost[0]?.likes}
-          dislikes={currentPost[0]?.dislikes}
-        />
-        <TextInput
-          value={newComment}
-          onChange={handleCommentArea}
-          type='text'
-          placeholder='Escreva seu comentário...'
-        />
-        <PostButton type='submit' onClick={getComment}>
-          Comentar
-        </PostButton>
-        <Rule />
-        <PostContainer>
-          {comments}
-        </PostContainer>
-      </MainContainer>
+      {userToken ?
+        < div >
+          <NavHead style={style} >
+            <FontAwesomeIcon onClick={() => goToPostPage(navigate)} style={styleCrossButton} icon={faXmark} />
+            <LogButton onClick={logOut}>Logout</LogButton>
+          </NavHead>
+          <MainContainer>
+            <Posts
+              key={currentPost[0]?.id}
+              postId={currentPost[0]?.id}
+              userName={currentPost[0]?.userName}
+              content={currentPost[0]?.content}
+              likes={currentPost[0]?.likes}
+              dislikes={currentPost[0]?.dislikes}
+            />
+            <TextInput
+              value={newComment}
+              onChange={handleCommentArea}
+              type='text'
+              placeholder='Escreva seu comentário...'
+            />
+            <PostButton type='submit' onClick={getComment}>
+              Comentar
+            </PostButton>
+            <Rule />
+            <PostContainer>
+              {comments}
+            </PostContainer>
+          </MainContainer>
+        </div >
+        :
+        <div>
+          <NavHead style={style} />
+          <MainContainer>
+            <h2>Usuário não autenticado!</h2>
+            <PostButton onClick={() => { goToLoginPage(navigate) }} >Login</PostButton>
+          </MainContainer>
+        </div>
+      }
     </>
   )
 }

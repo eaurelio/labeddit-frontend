@@ -59,7 +59,6 @@ export default function PostsPage() {
     <>
       {userToken ?
         < div >
-          <button onClick={() => goToErrorPage(navigate)} >Goto</button>
           <NavHead style={style} >
             <LogButton onClick={logOut}>Logout</LogButton>
           </NavHead>
@@ -90,27 +89,4 @@ export default function PostsPage() {
       }
     </>
   )
-  // return (
-  //   < div >
-  //     <button onClick={() => goToSignUpPage(navigate)} >Goto</button>
-  //     <NavHead style={style} >
-  //       <LogButton onClick={logOut}>Logout</LogButton>
-  //     </NavHead>
-  //     <MainContainer>
-  //       <TextInput
-  //         value={newPost}
-  //         onChange={handlePostArea}
-  //         type='text'
-  //         placeholder='Escreva seu post...'
-  //       />
-  //       <PostButton type='submit' onClick={getPostContent}>
-  //         Postar
-  //       </PostButton>
-  //       <Rule />
-  //       <PostContainer>
-  //         {posts}
-  //       </PostContainer>
-  //     </MainContainer>
-  //   </div >
-  // )
 }

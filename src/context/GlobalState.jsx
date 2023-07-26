@@ -2,7 +2,8 @@ import { useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 import axios from 'axios'
 
-const baseUrl = `https://deploy-backend-test-yxah.onrender.com`
+// const baseUrl = `https://deploy-backend-test-yxah.onrender.com`
+const baseUrl = `http://localhost:3003`
 const loginUrl = `${baseUrl}/users/login`
 const postPage = `${baseUrl}/posts`
 
@@ -48,7 +49,7 @@ export default function GlobalState(props) {
 
   const sendNewPost = async () => {
     const body = {
-      content: newComment
+      content: newPost
     }
     await axios.post(postPage, body, {
       headers: {
