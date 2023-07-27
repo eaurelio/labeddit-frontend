@@ -2,8 +2,8 @@ import { useState } from "react";
 import { GlobalContext } from "./GlobalContext";
 import axios from 'axios'
 
-// const baseUrl = `https://deploy-backend-test-yxah.onrender.com`
-const baseUrl = `http://localhost:3003`
+const baseUrl = `https://deploy-backend-test-yxah.onrender.com`
+// const baseUrl = `http://localhost:3003`
 const loginUrl = `${baseUrl}/users/login`
 const postPage = `${baseUrl}/posts`
 
@@ -21,7 +21,7 @@ export default function GlobalState(props) {
   const handlePassword = e => { setPassword(e.target.value); console.log(password) }
   const handlePostArea = e => { setNewPost(e.target.value); console.log(newPost) }
   const handleCommentArea = e => { setNewComment(e.target.value); console.log(newComment) }
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const userToken = localStorage.getItem('userToken')
 
   const getPosts = async (Token = userToken) => {
@@ -79,7 +79,7 @@ export default function GlobalState(props) {
     userToken,
     loginUrl,
     postPage,
-    logOut, loading,
+    logOut, loading, setLoading,
     baseUrl
   }
 

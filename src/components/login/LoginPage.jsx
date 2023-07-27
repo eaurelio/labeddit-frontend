@@ -14,15 +14,22 @@ import axios from 'axios'
 import { GlobalContext } from "../../context/GlobalContext"
 import labbedit_logo from '../../assets/img/labeddit_logo.png'
 import { emailValidator } from "../../assets/resources/validators"
+import LoadingModal from "../loadingModal/LoadingModal"
 
 
 export default function LoginPage(props) {
   const context = useContext(GlobalContext)
-  const { email, handleEmail, password, handlePassword, loginUrl } = context
+  const {
+    email, handleEmail,
+    password, handlePassword, 
+    loading, setLoading,
+    loginUrl
+    } = context
   
   const navigate = useNavigate()
 
   const login = async (userLogin) => {
+    setLoading(true)
     const body = userLogin
     await axios.post(loginUrl, body)
       .then(response => {
@@ -76,6 +83,7 @@ export default function LoginPage(props) {
           Crie uma conta!
         </SignUpButton>
       </InputContainer>
+      {loading && <LoadingModal />}
     </LoginContainer>
   )
 }

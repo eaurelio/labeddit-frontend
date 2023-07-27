@@ -19,7 +19,7 @@ import { faUpLong, faDownLong, faMessage } from '@fortawesome/free-solid-svg-ico
 export default function Posts(props) {
   const context = useContext(GlobalContext)
   const navigate = useNavigate()
-  const { getPosts,baseUrl } = context
+  const { getPosts, baseUrl, setLoading } = context
   const { postId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
@@ -55,6 +55,7 @@ export default function Posts(props) {
   }
 
   const handeCommentPage = () => {
+    setLoading(true)
     goToCommentPage(navigate, postId)
   }
 

@@ -11,15 +11,16 @@ import labelogo from '../../assets/img/labe_logo.png'
 import { useContext, useEffect } from 'react'
 import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
-import { goToLoginPage, goToErrorPage, goToSignUpPage } from "../../router/coordinator"
+import { goToLoginPage } from "../../router/coordinator"
 import Posts from './postContent/Posts'
+import LoadingModal from '../loadingModal/LoadingModal'
 // const userToken = localStorage.getItem('userToken')
 
 export default function PostsPage() {
 
   const navigate = useNavigate()
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, logOut } = context
+  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, logOut, loading } = context
   const userToken = localStorage.getItem('userToken')
 
   useEffect(() => { getPosts(userToken) }, [])
@@ -77,6 +78,7 @@ export default function PostsPage() {
               {posts}
             </PostContainer>
           </MainContainer>
+          {loading && <LoadingModal />}
         </div >
         :
         <div>

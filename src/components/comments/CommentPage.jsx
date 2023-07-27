@@ -6,7 +6,7 @@ import {
   PostContainer,
   Rule,
   TextInput
-} from "./StyledPostsPage";
+} from "../posts/StyledPostsPage";
 
 import labelogo from '../../assets/img/labe_logo.png'
 
@@ -16,10 +16,11 @@ import { GlobalContext } from "../../context/GlobalContext"
 import { useNavigate } from 'react-router-dom'
 import { goToPostPage, goToLoginPage } from "../../router/coordinator"
 import { useParams } from "react-router-dom"
-import Posts from "./postContent/Posts";
-import Comments from "./postContent/Comments";
+import Posts from "../posts/postContent/Posts";
+import Comments from "./commentsContent/Comments";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import LoadingModal from "../loadingModal/LoadingModal";
 
 export default function CommentPage(props) {
   const style = {
@@ -43,13 +44,15 @@ export default function CommentPage(props) {
     commentList, getComments,
     setCommentList,
     logOut, baseUrl,
-    newComment, handleCommentArea, setNewComment
+    newComment, handleCommentArea, setNewComment,
+    loading, setLoading
   } = context
 
   const currentPost = postList.filter(el => el.id === postId)
 
   useEffect(() => getPosts, [])
   useEffect(() => async () => {
+    setLoading(true)
     const commentsPage = `${baseUrl}/posts/comment/${postId}`
     await axios.get(commentsPage, {
       headers: {
@@ -74,6 +77,7 @@ export default function CommentPage(props) {
   />)
 
   const sendNewComment = async (newComment) => {
+    setLoading(true)
     const commentPage = `${baseUrl}/posts/comment/${postId}`
     const body = {
       content: newComment
@@ -85,6 +89,7 @@ export default function CommentPage(props) {
     })
       .then(response => {
         getComments(postId)
+        setLoading(false)
         // console.log(response)
       })
       .catch(error => console.log(error))
@@ -158,6 +163,7 @@ export default function CommentPage(props) {
               {comments}
             </PostContainer>
           </MainContainer>
+          {loading && <LoadingModal />}
         </div >
         :
         <div>

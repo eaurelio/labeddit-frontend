@@ -5,19 +5,19 @@ import {
   PostFooter,
   LikesContainer,
   LikesDislikes
-} from './StyledPostContent'
+} from '../../posts/postContent/StyledPostContent'
 import axios from 'axios'
 import { useContext } from 'react'
 import { GlobalContext } from "../../../context/GlobalContext"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUpLong, faDownLong } from '@fortawesome/free-solid-svg-icons'
+import { faUpLong, faDownLong, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Comments(props) {
   // console.log(props)
   const context = useContext(GlobalContext)
-  const { getComments,baseUrl } = context
+  const { getComments, baseUrl } = context
   const { postId, commentId, content, userName, likes, dislikes } = props
 
   const likeDislike = async (event) => {
