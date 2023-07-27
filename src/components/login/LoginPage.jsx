@@ -21,7 +21,7 @@ export default function LoginPage(props) {
   const context = useContext(GlobalContext)
   const {
     email, handleEmail,
-    password, handlePassword, 
+    password, handlePassword,
     loading, setLoading,
     loginUrl
     } = context
@@ -35,6 +35,7 @@ export default function LoginPage(props) {
       .then(response => {
         console.log(response.data.token)
         localStorage.setItem('userToken', response.data.token)
+        localStorage.setItem('loggedUserName', response.data.userName)
         goToPostPage(navigate)
       })
       .catch(error => {

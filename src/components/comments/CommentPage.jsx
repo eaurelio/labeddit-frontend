@@ -40,7 +40,7 @@ export default function CommentPage(props) {
   const { postId } = useParams()
   const {
     postList, getPosts,
-    userToken,
+    userToken, loggedUserName, getUserName,
     commentList, getComments,
     setCommentList,
     logOut, baseUrl,
@@ -51,6 +51,7 @@ export default function CommentPage(props) {
   const currentPost = postList.filter(el => el.id === postId)
 
   useEffect(() => getPosts, [])
+  useEffect(() => { getUserName() }, [])
   useEffect(() => async () => {
     setLoading(true)
     const commentsPage = `${baseUrl}/posts/comment/${postId}`
@@ -60,6 +61,7 @@ export default function CommentPage(props) {
       }
     })
       .then(response => {
+        setLoading(false)
         setCommentList(response.data)
       }
       )
@@ -90,7 +92,6 @@ export default function CommentPage(props) {
       .then(response => {
         getComments(postId)
         setLoading(false)
-        // console.log(response)
       })
       .catch(error => console.log(error))
   }
@@ -101,37 +102,7 @@ export default function CommentPage(props) {
     setNewComment('')
 
   }
-  // return (
-  //   <>
-  // <NavHead style={style} >
-  //   <FontAwesomeIcon onClick={() => goToPostPage(navigate)} style={styleCrossButton} icon={faXmark} />
-  //   <LogButton onClick={logOut}>Logout</LogButton>
-  // </NavHead>
-  // <MainContainer>
-  //   <Posts
-  //     key={currentPost[0]?.id}
-  //     postId={currentPost[0]?.id}
-  //     userName={currentPost[0]?.userName}
-  //     content={currentPost[0]?.content}
-  //     likes={currentPost[0]?.likes}
-  //     dislikes={currentPost[0]?.dislikes}
-  //   />
-  //   <TextInput
-  //     value={newComment}
-  //     onChange={handleCommentArea}
-  //     type='text'
-  //     placeholder='Escreva seu comentário...'
-  //   />
-  //   <PostButton type='submit' onClick={getComment}>
-  //     Comentar
-  //   </PostButton>
-  //   <Rule />
-  //   <PostContainer>
-  //     {comments}
-  //   </PostContainer>
-  // </MainContainer>
-  //   </>
-  // )
+
   return (
     <>
       {userToken ?
@@ -141,6 +112,7 @@ export default function CommentPage(props) {
             <LogButton onClick={logOut}>Logout</LogButton>
           </NavHead>
           <MainContainer>
+            <p>Bem-vindo(a), {loggedUserName}!</p>
             <Posts
               key={currentPost[0]?.id}
               postId={currentPost[0]?.id}

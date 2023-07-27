@@ -55,7 +55,7 @@ export default function Posts(props) {
   }
 
   const handeCommentPage = () => {
-    setLoading(true)
+    // setLoading(true)
     goToCommentPage(navigate, postId)
   }
 

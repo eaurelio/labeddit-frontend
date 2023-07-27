@@ -20,10 +20,15 @@ export default function PostsPage() {
 
   const navigate = useNavigate()
   const context = useContext(GlobalContext)
-  const { newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList, logOut, loading } = context
+  const { 
+    newPost, setNewPost, handlePostArea, getPosts, sendNewPost, postList,
+    logOut, loading,
+    loggedUserName, getUserName
+   } = context
   const userToken = localStorage.getItem('userToken')
 
   useEffect(() => { getPosts(userToken) }, [])
+  useEffect(() => { getUserName() }, [])
 
   const style = {
     backgroundImage: `url(${labelogo})`,
@@ -64,6 +69,7 @@ export default function PostsPage() {
             <LogButton onClick={logOut}>Logout</LogButton>
           </NavHead>
           <MainContainer>
+            <p>Bem-vindo(a), {loggedUserName}!!</p>
             <TextInput
               value={newPost}
               onChange={handlePostArea}

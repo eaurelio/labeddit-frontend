@@ -10,6 +10,7 @@ const postPage = `${baseUrl}/posts`
 
 export default function GlobalState(props) {
   const [name, setName] = useState('')
+  const [loggedUserName, setLoggedUserName] = useState('')
   const [email, setMail] = useState('')
   const [password, setPassword] = useState('')
   const [newPost, setNewPost] = useState('')
@@ -30,9 +31,7 @@ export default function GlobalState(props) {
         Authorization: Token
       }
     })
-      // .then(() => setLoading(true))
-      .then(response => { setPostList(response.data) })
-      .then(() => setLoading(false))
+      .then(response => { setPostList(response.data); setLoading(false) })
       .catch(error => console.log(error))
   }
 
@@ -43,7 +42,7 @@ export default function GlobalState(props) {
         Authorization: userToken
       }
     })
-      .then(response => { setCommentList(response.data); console.log(response.data) })
+      .then(response => { setCommentList(response.data); setLoading(false) })
       .catch(error => console.log(error))
   }
 
@@ -66,6 +65,12 @@ export default function GlobalState(props) {
     window.location.reload()
   }
 
+  const getUserName = () => {
+    setLoggedUserName(
+      localStorage.getItem('loggedUserName')
+    )
+  }
+
   const context = {
     name, handleName, setName,
     email, handleEmail, setMail,
@@ -74,13 +79,12 @@ export default function GlobalState(props) {
     newComment, handleCommentArea, setNewComment,
     postList, setPostList,
     commentList, setCommentList,
-    getPosts, sendNewPost,
-    getComments,
+    getPosts, sendNewPost, getComments,
     userToken,
-    loginUrl,
-    postPage,
+    loginUrl, postPage, baseUrl,
     logOut, loading, setLoading,
-    baseUrl
+    loggedUserName, setLoggedUserName, getUserName
+    
   }
 
   return (
