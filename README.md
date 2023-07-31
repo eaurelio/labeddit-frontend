@@ -4,8 +4,13 @@ Esse é o repositório do front-end do projeto Labeddit. Uma rede social onde vo
 
 Link do deploy do site, [clique aqui](https://labeddit-edson-exe.surge.sh)
 
+Repositório backend, [clique aqui](https://github.com/eaurelio/labeddit-node-backend)
+
+Documentação backend (postman), [clique aqui](https://documenter.getpostman.com/view/24823115/2s9XxtzbGD)
+
 ## Recursos utilizados
 * React
-* React Router
+* React Router Dom
+* Styled Components
 * Axios
 * Fontawesome Icons
