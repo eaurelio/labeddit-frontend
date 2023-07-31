@@ -39,16 +39,17 @@ export default function Comments(props) {
       })
       .catch(error => {
         console.log(error.response.data)
-        switch (error.response.data) {
-          case 'Post não encontrado!':
-            window.alert(error.response.data)
-            break
-          case 'Você não pode curtir seu próprio post!':
-            window.alert(error.response.data)
-            break
-          default:
-            window.alert(error.response.data)
-        }
+        // window.alert(error.response.data)
+        // switch (error.response.data) {
+        //   case 'Post não encontrado!':
+        //     window.alert(error.response.data)
+        //     break
+        //   case 'Você não pode curtir seu próprio post!':
+        //     window.alert(error.response.data)
+        //     break
+        //   default:
+        //     window.alert(error.response.data)
+        // }
       })
   }
 

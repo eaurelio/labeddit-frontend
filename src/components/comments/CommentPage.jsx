@@ -50,8 +50,6 @@ export default function CommentPage(props) {
 
   const currentPost = postList.filter(el => el.id === postId)
 
-  useEffect(() => getPosts, [])
-  useEffect(() => { getUserName() }, [])
   useEffect(() => async () => {
     setLoading(true)
     const commentsPage = `${baseUrl}/posts/comment/${postId}`
@@ -61,12 +59,14 @@ export default function CommentPage(props) {
       }
     })
       .then(response => {
-        setLoading(false)
         setCommentList(response.data)
+        setLoading(false)
       }
       )
-      .catch(error => console.log(error))
+      .catch(error => {console.log(error); setLoading(false)})
   }, [])
+  // useEffect(() => getPosts, [])
+  useEffect(() => { getUserName() }, [])
 
   const comments = commentList.map(comment => <Comments
     key={comment.id}

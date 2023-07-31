@@ -31,8 +31,8 @@ export default function GlobalState(props) {
         Authorization: Token
       }
     })
-      .then(response => { setPostList(response.data); setLoading(false) })
-      .catch(error => console.log(error))
+      .then(response => { setPostList(response.data);  })
+      .catch(error => {console.log(error); })
   }
 
   const getComments = async (postId) => {
@@ -43,10 +43,11 @@ export default function GlobalState(props) {
       }
     })
       .then(response => { setCommentList(response.data); setLoading(false) })
-      .catch(error => console.log(error))
+      .catch(error => {console.log(error); setLoading(false)})
   }
 
   const sendNewPost = async () => {
+    setLoading(true)
     const body = {
       content: newPost
     }
@@ -55,7 +56,7 @@ export default function GlobalState(props) {
         Authorization: userToken
       }
     })
-      .then(response => { console.log(response); getPosts() })
+      .then(response => { console.log(response); getPosts(); setLoading(false) })
       .catch(error => console.log(error))
   }
 
